@@ -1,0 +1,34 @@
+<h1>Chats</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Remitente</th>
+      <th>Receptor</th>
+      <th>Mensajes</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @chats.any? %>
+      <% @chats.each do |chat| %>
+        <tr>
+          <td><%= chat.id %></td>
+          <td><%= chat.sender.email %></td>
+          <td><%= chat.receiver.email %></td>
+          <td><%= chat.messages.count %></td>
+          <td>
+            <%= link_to 'Ver', chat_path(chat), class: 'btn btn-primary btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="5" class="text-center text-muted py-4">
+          No hay chats disponibles
+          <%= link_to 'Iniciar nuevo chat', new_chat_path, class: 'btn btn-link' if controller.action_methods.include?('new') %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

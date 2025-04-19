@@ -1,0 +1,35 @@
+<h1>Mensajes</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Chat</th>
+      <th>Usuario</th>
+      <th>Contenido</th>
+      <th>Fecha</th>
+      <th>Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @messages.any? %>
+      <% @messages.each do |message| %>
+        <tr>
+          <td><%= message.id %></td>
+          <td>Chat #<%= message.chat_id %></td>
+          <td><%= message.user.email %></td>
+          <td><%= truncate(message.body, length: 30) %></td>
+          <td><%= message.created_at.to_formatted_s(:short) %></td>
+          <td>
+            <%= link_to 'Ver', message_path(message), class: 'btn btn-primary btn-sm' %>
+          </td>
+        </tr>
+      <% end %>
+    <% else %>
+      <tr>
+        <td colspan="6" class="text-center text-muted py-4">
+          No hay mensajes disponibles
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
